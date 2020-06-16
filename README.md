@@ -41,12 +41,12 @@ export class AppModule {}
 ### Build npm module errors
 #### error NG6002: Appears in the NgModule.imports of AppModule, but could not be resolved to an NgModule class
 
-Method 1
+* Method 1
 
 - first run: npx ngcc && ngcc -s dist
 - then npm run build
 
-Method 2 disable ivy in tsconfig.ts
+* Method 2: disable ivy in tsconfig.ts
 
 - set in tsconfig.ts 
 
