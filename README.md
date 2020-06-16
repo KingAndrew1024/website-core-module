@@ -37,3 +37,18 @@ import { WebsiteCoreModule } from '@virket/website-core/dist/src';
 })
 export class AppModule {}
 ```
+
+### Build npm module errors
+#### error NG6002: Appears in the NgModule.imports of AppModule, but could not be resolved to an NgModule class
+- first run: npx ngcc && ngcc -s dist
+- then npm run build
+or disable ivy in tsconfig.ts
+- set in tsconfig.ts 
+
+```js
+angularCompilerOptions {
+  ...
+  "enableIvy": false
+  ...
+}
+```
