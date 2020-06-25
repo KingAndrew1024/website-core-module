@@ -25,6 +25,7 @@ const reducer: ActionReducer<WebsiteState> = createReducer(
     on(
         fromActions.LoadWebsiteBeginAction,
         fromActions.UpdateWebsiteBeginAction,
+        fromActions.UpdateBusinessBeginAction,
         (state): WebsiteState => ({
         ...state,
         error: null,
@@ -32,21 +33,20 @@ const reducer: ActionReducer<WebsiteState> = createReducer(
         isLoading: true,
     })),
 
-    on(fromActions.LoadWebsiteSuccessAction, (state, action): WebsiteState => ({
-        ...state,
-        isLoading: false,
-        data: action.payload,
-    })),
     on(
         fromActions.LoadWebsiteFailAction,
         fromActions.UpdateWebsiteFailAction,
+        fromActions.UpdateBusinessFailAction,
         (state, action): WebsiteState => ({
         ...state,
         isLoading: false,
         error: { after: getErrorActionType(action.type), error: action.errors }
     })),
 
-    on(fromActions.UpdateWebsiteSuccessAction, (state, action): WebsiteState => ({
+    on(fromActions.LoadWebsiteSuccessAction,
+        fromActions.UpdateWebsiteSuccessAction,
+        fromActions.UpdateBusinessSuccessAction,
+        (state, action): WebsiteState => ({
         ...state,
         isLoading: false,
         data: action.payload,
@@ -62,6 +62,7 @@ function getErrorActionType(type: fromActions.WebsiteActionTypes) {
         case fromActions.WebsiteActionTypes.LoadWebsiteFail:
             action = "GET"; break;
         case fromActions.WebsiteActionTypes.UpdateWebsiteFail:
+        case fromActions.WebsiteActionTypes.UpdateBusinessFail:
             action = "UPDATE"; break;
     }
 
@@ -76,6 +77,7 @@ function getSuccessActionType(type: fromActions.WebsiteActionTypes) {
         case fromActions.WebsiteActionTypes.LoadWebsiteSuccess:
             action = "GET"; break;
         case fromActions.WebsiteActionTypes.UpdateWebsiteSuccess:
+        case fromActions.WebsiteActionTypes.UpdateBusinessSuccess:
             action = "UPDATE"; break;
     }
 

@@ -29,7 +29,7 @@ export class WebsitePageModel implements IWebsitePageProps {
     }
 }
 
-export class WebsiteModel implements IWebsiteProps {
+export class WebsiteModel implements IWebsiteModelProps {
     siteId: number
     title: string
     email: string
@@ -47,24 +47,33 @@ export class WebsiteModel implements IWebsiteProps {
     }
     phone: string
     mobile: string
+    hoursOfOperation: any[];
+    hoursOfOperationNotes: string;
+    paymentForms: ("visa" | "mastercard" | "cash" | "checks" | "american-express")[];
+    products: string[];
 
-    constructor(data: IWebsiteProps) {
+    constructor(data: IWebsiteModelProps) {
         this.siteId = data.siteId
-        this.title = data.title,
-        this.email = data.email,
-        this.facebook = data.facebook && data.facebook != 'null' ? data.facebook : '',
-        this.twitter = data.twitter && data.twitter != 'null' ? data.twitter : '',
-        this.instagram = data.instagram && data.instagram != 'null' ? data.instagram : '',
-        this.gplus = data.gplus && data.gplus != 'null' ? data.gplus : '',
-        this.siteUrl = data.siteUrl,
-        this.subdomain = data.subdomain,
-        this.about = data.about,
-        this.displayPicture = data.displayPicture,
-        this.phone = data.phone,
+        this.title = data.title
+        this.email = data.email
+        this.facebook = data.facebook && data.facebook != 'null' ? data.facebook : ''
+        this.twitter = data.twitter && data.twitter != 'null' ? data.twitter : ''
+        this.instagram = data.instagram && data.instagram != 'null' ? data.instagram : ''
+        this.gplus = data.gplus && data.gplus != 'null' ? data.gplus : ''
+        this.siteUrl = data.siteUrl
+        this.subdomain = data.subdomain
+        this.about = data.about
+        this.displayPicture = data.displayPicture
+        this.phone = data.phone
         this.mobile = data.mobile
+        this.hoursOfOperation = data.hoursOfOperation || []
+        this.hoursOfOperationNotes = data.hoursOfOperationNotes || ''
+        this.paymentForms = data.paymentForms || []
+        this.products = data.products || []
     }
+    
 
-    static toStorage(website: WebsiteModel): IWebsiteProps {
+    static toStorage(website: WebsiteModel): IWebsiteModelProps {
         return {
             siteId: website.siteId,
             title: website.title,
@@ -79,10 +88,14 @@ export class WebsiteModel implements IWebsiteProps {
             displayPicture: website.displayPicture,
             phone: website.phone,
             mobile: website.mobile,
+            hoursOfOperation: website.hoursOfOperation,
+            hoursOfOperationNotes: website.hoursOfOperationNotes,
+            paymentForms: website.paymentForms,
+            products: website.products
         }
     }
 
-    static fromApiResponse(data: IWebsiteApiProps): IWebsiteProps {
+    static fromApiResponse(data: IWebsiteApiProps): IWebsiteModelProps {
         return new WebsiteModel({
             siteId: +data.site_id,
             title: data.site_data.title,
@@ -97,6 +110,10 @@ export class WebsiteModel implements IWebsiteProps {
             displayPicture: data.site_data.display_picture,
             phone: data.site_data.phone,
             mobile: data.site_data.mobile,
+            hoursOfOperation: data.site_data.hours_of_operation,
+            hoursOfOperationNotes: data.site_data.hours_of_operation_notes,
+            paymentForms: data.site_data.payment_forms,
+            products: data.site_data.products
         })
     }
 
@@ -115,11 +132,15 @@ export class WebsiteModel implements IWebsiteProps {
             displayPicture: null,
             phone: null,
             mobile: null,
+            hoursOfOperation: null,
+            hoursOfOperationNotes: null,
+            paymentForms: null,
+            products: null
         })
     }
 }
 
-export interface IWebsiteProps {
+export interface IWebsiteModelProps {
     siteId: number
     title: string
     email: string
@@ -137,6 +158,10 @@ export interface IWebsiteProps {
     }
     phone: string
     mobile: string
+    hoursOfOperation: Array<any>
+    hoursOfOperationNotes: string
+    paymentForms: Array<'visa' | 'mastercard' | 'cash' | 'checks' | 'american-express'>
+    products: Array<string>
 }
 
 export interface IWebsitePageProps {

@@ -4,7 +4,8 @@ import { IHttpBasicResponse } from './IHttpBasicResponse';
 
 export interface IWebsiteRepository {
     getWebsiteData(): Observable<IHttpBasicResponse<Array<IWebsiteApiProps>>>;
-    updateWebsiteData(siteId: number, payload: any): Observable<IHttpBasicResponse<IWebsiteDataProps>>;
+    updateWebsiteData(siteId: number, payload: IWebsiteFormProps): Observable<IHttpBasicResponse<IWebsiteDataProps>>;
+    updateBusinessData(siteId: number, payload: IBusinessFormProps): Observable<IHttpBasicResponse<IWebsiteDataProps>>;
 }
 
 export interface IWebsiteApiProps {
@@ -12,7 +13,7 @@ export interface IWebsiteApiProps {
     site_data: IWebsiteDataProps
 }
 
-export interface IWebsiteDataProps extends IWebsiteFormProps{
+export interface IWebsiteDataProps extends IWebsiteFormProps, IBusinessFormProps {
     theme_id: number
     site_url: string
     subdomian: string
@@ -29,4 +30,11 @@ export interface IWebsiteFormProps {
     about: string
     phone: string
     mobile: string
+}
+
+export interface IBusinessFormProps{
+    hours_of_operation: Array<any>
+    hours_of_operation_notes: string
+    payment_forms: Array<'visa' | 'mastercard' | 'cash' | 'checks' | 'american-express'>
+    products: Array<string>
 }

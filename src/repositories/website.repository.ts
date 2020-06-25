@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IWebsiteRepository, IWebsiteApiProps, IWebsiteDataProps } from '../core/contracts/IWebsite.repository';
+import { IWebsiteRepository, IWebsiteApiProps, IWebsiteDataProps, IWebsiteFormProps, IBusinessFormProps } from '../core/contracts/IWebsite.repository';
 import { IHttpBasicResponse } from '../core/contracts/IHttpBasicResponse';
 import { AppSettingsService } from '../providers/global-params';
 
@@ -19,7 +19,7 @@ export class WebsiteRepository implements IWebsiteRepository{
         return this.httpClient.get<IHttpBasicResponse<Array<IWebsiteApiProps>>>(`${this.BASE_URL}/sites`);
     }
 
-    updateWebsiteData(siteId: number, payload: any): Observable<IHttpBasicResponse<IWebsiteDataProps>> {
+    updateWebsiteData(siteId: number, payload: IWebsiteFormProps): Observable<IHttpBasicResponse<IWebsiteDataProps>> {
         //console.log("------ EXECUTING WebsiteRepository.updateWebsiteData()");
 
         let params = new HttpParams();
@@ -30,5 +30,16 @@ export class WebsiteRepository implements IWebsiteRepository{
         const body = params.toString();
         
         return this.httpClient.post<IHttpBasicResponse<IWebsiteDataProps>>(`${this.BASE_URL}/update_site/${siteId}`, body);
+    }
+
+    updateBusinessData(siteId: number, payload: IBusinessFormProps){
+        let params = new HttpParams();
+        for (const key in payload) {
+            if (payload.hasOwnProperty(key))
+                params = params.append(key, payload[key]);
+        }
+        const body = params.toString();
+        
+        return this.httpClient.post<IHttpBasicResponse<IWebsiteDataProps>>(`${this.BASE_URL}/update_business_info/${siteId}`, body);
     }
 }

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as fromSelector from '../../store/website.selectors';
 import * as fromActions from '../../store/website.actions';
 import * as fromReducer from '../../store/website.reducer';
+import { IWebsiteFormProps, IBusinessFormProps } from '../../core/contracts/IWebsite.repository';
 
 
 @Injectable()
@@ -20,5 +21,7 @@ export class WebsiteStore {
 
     get Website$() { return this.store.select(fromSelector.getWebsiteData) }
 
-    UpdateWebsite(siteId: number, payload) { this.store.dispatch(fromActions.UpdateWebsiteBeginAction({ siteId: siteId,  payload: payload })) }
+    UpdateWebsite(siteId: number, payload: IWebsiteFormProps) { this.store.dispatch(fromActions.UpdateWebsiteBeginAction({ siteId,  payload })) }
+    
+    UpdateBusinessData(siteId: number, payload: IBusinessFormProps) { this.store.dispatch(fromActions.UpdateBusinessBeginAction({ siteId,  payload })) }
 }

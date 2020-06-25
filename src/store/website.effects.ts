@@ -41,6 +41,23 @@ export class WebsiteEffects {
         )
     )
 
+    updateBusiness$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(fromActions.WebsiteActionTypes.UpdateBusinessBegin),
+            switchMap((action) => {
+                return this.service.updateBusinessData((<any>action).siteId, (<any>action).payload).pipe(
+                    map(response => {
+                        return fromActions.UpdateBusinessSuccessAction({ payload: response })
+                    }),
+                    catchError(errors => {
+                        console.error("WebsiteEffects.updateBusiness$ ERROR", errors);
+                        return of(fromActions.UpdateBusinessFailAction({ errors: errors }))
+                    })
+                )
+            })
+        )
+    )
+
     constructor(
         private actions$: Actions,
         @Inject(WEBSITE_SERVICE) private service: IWebsiteService

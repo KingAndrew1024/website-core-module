@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store'
 
 import { WebsitePageModel } from '../core/models/website.model'
+import { IWebsiteFormProps, IBusinessFormProps } from '../core/contracts/IWebsite.repository'
 
 export enum WebsiteActionTypes{
     LoadWebsiteBegin = "[WEBSITE] Load Webiste Begin",
@@ -10,6 +11,10 @@ export enum WebsiteActionTypes{
     UpdateWebsiteBegin = "[WEBSITE] Update Webiste Begin",
     UpdateWebsiteSuccess = "[WEBSITE] Update Webiste Success",
     UpdateWebsiteFail = "[WEBSITE] Update Webiste Fail",
+
+    UpdateBusinessBegin = "[WEBSITE] Update Business Begin",
+    UpdateBusinessSuccess = "[WEBSITE] Update Business Success",
+    UpdateBusinessFail = "[WEBSITE] Update Business Fail"
 }
 
 export const LoadWebsiteBeginAction = createAction(
@@ -28,7 +33,7 @@ export const LoadWebsiteFailAction  = createAction(
 
 export const UpdateWebsiteBeginAction = createAction(
     WebsiteActionTypes.UpdateWebsiteBegin,
-    props<{ siteId: number, payload: any }>()
+    props<{ siteId: number, payload: IWebsiteFormProps }>()
 )
 
 export const UpdateWebsiteSuccessAction = createAction(
@@ -38,5 +43,20 @@ export const UpdateWebsiteSuccessAction = createAction(
 
 export const UpdateWebsiteFailAction  = createAction(
     WebsiteActionTypes.UpdateWebsiteFail,
+    props<{ errors: any }>()
+)
+
+export const UpdateBusinessBeginAction = createAction(
+    WebsiteActionTypes.UpdateBusinessBegin,
+    props<{ siteId: number, payload: IBusinessFormProps }>()
+)
+
+export const UpdateBusinessSuccessAction = createAction(
+    WebsiteActionTypes.UpdateBusinessSuccess,
+    props<{ payload: WebsitePageModel }>()
+)
+
+export const UpdateBusinessFailAction  = createAction(
+    WebsiteActionTypes.UpdateBusinessFail,
     props<{ errors: any }>()
 )
