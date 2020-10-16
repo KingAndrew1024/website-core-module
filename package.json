@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "ngc": "ngc",
     "build": "rm -rf aot dist && npm run ngc",
-    "publishPackage": "npm run build && npm publish"
+    "publishPackage": "npm run build && npm publish --access public"
   },
   "repository": {
     "type": "git",
