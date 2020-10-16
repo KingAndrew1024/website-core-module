@@ -33,3 +33,8 @@ export const getWebsiteData = createSelector(
     getWebsitePageState,
     _getWebsiteData
 )
+
+export const hasBeenFetched = createSelector(
+    getWebsitePageState,
+    state => state.hasBeenFetched
+)

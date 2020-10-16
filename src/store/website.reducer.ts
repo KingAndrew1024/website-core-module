@@ -8,6 +8,7 @@ import { IWebsiteStateError, IWebsiteStateSuccess } from '../core/contracts/ISta
 export interface WebsiteState {
     isLoading: boolean,
     data: WebsitePageModel,
+    hasBeenFetched: boolean,
     error: IWebsiteStateError,
     success: IWebsiteStateSuccess
 }
@@ -15,6 +16,7 @@ export interface WebsiteState {
 export const initialState: WebsiteState = {
     isLoading: false,
     data: WebsitePageModel.empty(),
+    hasBeenFetched: false,
     error: null,
     success: null
 }
@@ -44,7 +46,15 @@ const reducer: ActionReducer<WebsiteState> = createReducer(
     })),
 
     on(fromActions.LoadWebsiteSuccessAction,
-        fromActions.UpdateWebsiteSuccessAction,
+        (state, action): WebsiteState => ({
+        ...state,
+        isLoading: false,
+        hasBeenFetched: true,
+        data: action.payload,
+        success: { after: getSuccessActionType(action.type) }
+    })),
+
+    on(fromActions.UpdateWebsiteSuccessAction,
         fromActions.UpdateBusinessSuccessAction,
         (state, action): WebsiteState => ({
         ...state,

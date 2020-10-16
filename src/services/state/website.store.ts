@@ -21,7 +21,11 @@ export class WebsiteStore {
 
     get Website$() { return this.store.select(fromSelector.getWebsiteData) }
 
-    UpdateWebsite(siteId: number, payload: IWebsiteFormProps) { this.store.dispatch(fromActions.UpdateWebsiteBeginAction({ siteId,  payload })) }
-    
-    UpdateBusinessData(siteId: number, payload: IBusinessFormProps) { this.store.dispatch(fromActions.UpdateBusinessBeginAction({ siteId,  payload })) }
+    get HasBeenFetched$() {
+        return this.store.select(fromSelector.hasBeenFetched);
+    }
+
+    UpdateWebsite(siteId: number, payload: IWebsiteFormProps) { this.store.dispatch(fromActions.UpdateWebsiteBeginAction({ siteId, payload })) }
+
+    UpdateBusinessData(siteId: number, payload: IBusinessFormProps) { this.store.dispatch(fromActions.UpdateBusinessBeginAction({ siteId, payload })) }
 }
