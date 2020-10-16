@@ -37,7 +37,7 @@ export class WebsiteRepository implements IWebsiteRepository {
         let urlSearchParams = new URLSearchParams();
 
         Object.keys(payload).forEach((key: string) => {
-            urlSearchParams.append(key, payload[key]);
+            //urlSearchParams.append(key, payload[key]);
             (typeof payload[key] === 'object') ?
                 urlSearchParams.append(key, JSON.stringify(payload[key]))
                 :
