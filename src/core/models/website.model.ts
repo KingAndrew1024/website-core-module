@@ -96,6 +96,11 @@ export class WebsiteModel implements IWebsiteModelProps {
     }
 
     static fromApiResponse(data: IWebsiteApiProps): IWebsiteModelProps {
+        let siteUrl = (data.site_data.site_url || '').replace('https', 'http');
+
+        if(siteUrl)
+            siteUrl = siteUrl.startsWith('http') ? siteUrl : 'http://' + siteUrl;
+
         return new WebsiteModel({
             siteId: +data.site_id,
             title: data.site_data.title,
