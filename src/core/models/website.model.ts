@@ -109,7 +109,7 @@ export class WebsiteModel implements IWebsiteModelProps {
             twitter: data.site_data.twitter,
             instagram: data.site_data.instagram,
             gplus: data.site_data.gplus,
-            siteUrl: data.site_data.site_url,
+            siteUrl,
             subdomain: data.site_data.subdomian,
             about: data.site_data.about,
             displayPicture: data.site_data.display_picture,
