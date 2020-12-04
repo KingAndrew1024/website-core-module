@@ -1,8 +1,8 @@
 export interface IWebsiteStateError {
-    after: 'GET' | 'UPDATE' | 'UNKNOWN'
-    error: any
+    after: 'GET' | 'UPDATE' | 'UNKNOWN';
+    error: any;
 }
 
 export interface IWebsiteStateSuccess {
-    after: 'GET' | 'UPDATE' | 'UNKNOWN'
+    after: 'GET' | 'UPDATE' | 'UNKNOWN';
 }

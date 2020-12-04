@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-
+import { catchError, map } from 'rxjs/operators';
+import { IBusinessFormProps, IWebsiteFormProps } from '../core/contracts/IWebsite.repository';
 import { IWebsiteService } from '../core/contracts/IWebsite.service';
-import { WebsiteRepository } from '../repositories/website.repository';
 import { WebsitePageModel } from '../core/models/website.model';
-import { IWebsiteFormProps, IBusinessFormProps } from '../core/contracts/IWebsite.repository';
+import { WebsiteRepository } from '../repositories/website.repository';
 
 @Injectable()
 export class WebsiteService implements IWebsiteService {
@@ -19,7 +18,7 @@ export class WebsiteService implements IWebsiteService {
                 return WebsitePageModel.fromApiResponse(response.data);
             }),
             catchError(error => {
-                throw error
+                throw error;
             })
         );
     }
@@ -27,10 +26,10 @@ export class WebsiteService implements IWebsiteService {
     updateWebsiteData(siteId: number, payload: IWebsiteFormProps): Observable<WebsitePageModel> {
         return this.repository.updateWebsiteData(siteId, payload).pipe(
             map((response) => {
-                return WebsitePageModel.fromApiResponse([{site_id: siteId.toString(), site_data: response.data}]);
+                return WebsitePageModel.fromApiResponse([{ site_id: siteId.toString(), site_data: response.data }]);
             }),
             catchError(error => {
-                throw error
+                throw error;
             })
         );
     }
@@ -38,10 +37,10 @@ export class WebsiteService implements IWebsiteService {
     updateBusinessData(siteId: number, payload: IBusinessFormProps): Observable<WebsitePageModel> {
         return this.repository.updateBusinessData(siteId, payload).pipe(
             map((response) => {
-                return WebsitePageModel.fromApiResponse([{site_id: siteId.toString(), site_data: response.data}]);
+                return WebsitePageModel.fromApiResponse([{ site_id: siteId.toString(), site_data: response.data }]);
             }),
             catchError(error => {
-                throw error
+                throw error;
             })
         );
     }

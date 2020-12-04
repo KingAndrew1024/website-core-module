@@ -1,17 +1,16 @@
-import { IWebsiteApiProps } from "../contracts/IWebsite.repository";
-
+import { IWebsiteApiProps } from '../contracts/IWebsite.repository';
 
 export class WebsitePageModel implements IWebsitePageProps {
     websiteList: WebsiteModel[];
 
     constructor(data: IWebsitePageProps) {
-        this.websiteList = data.websiteList
+        this.websiteList = data.websiteList;
     }
 
     static toStorage(websitePage: WebsitePageModel): IWebsitePageProps {
         return {
             websiteList: websitePage.websiteList
-        }
+        };
     }
 
     static fromApiResponse(raw: Array<IWebsiteApiProps>): IWebsitePageProps {
@@ -30,48 +29,48 @@ export class WebsitePageModel implements IWebsitePageProps {
 }
 
 export class WebsiteModel implements IWebsiteModelProps {
-    siteId: number
-    title: string
-    email: string
-    facebook: string
-    twitter: string
-    instagram: string
-    gplus: string
-    siteUrl: string
-    subdomain: string
-    about: string
+    siteId: number;
+    title: string;
+    email: string;
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    gplus: string;
+    siteUrl: string;
+    subdomain: string;
+    about: string;
     displayPicture: {
         sizes: {
             thumbnail: string
         }
-    }
-    phone: string
-    mobile: string
+    };
+    phone: string;
+    mobile: string;
     hoursOfOperation: any[];
     hoursOfOperationNotes: string;
-    paymentForms: ("visa" | "mastercard" | "cash" | "checks" | "american-express")[];
+    paymentForms: ('visa' | 'mastercard' | 'cash' | 'checks' | 'american-express')[];
     products: string[];
 
     constructor(data: IWebsiteModelProps) {
-        this.siteId = data.siteId
-        this.title = data.title
-        this.email = data.email
-        this.facebook = data.facebook && data.facebook != 'null' ? data.facebook : ''
-        this.twitter = data.twitter && data.twitter != 'null' ? data.twitter : ''
-        this.instagram = data.instagram && data.instagram != 'null' ? data.instagram : ''
-        this.gplus = data.gplus && data.gplus != 'null' ? data.gplus : ''
-        this.siteUrl = data.siteUrl
-        this.subdomain = data.subdomain
-        this.about = data.about
-        this.displayPicture = data.displayPicture
-        this.phone = data.phone
-        this.mobile = data.mobile
-        this.hoursOfOperation = data.hoursOfOperation || []
-        this.hoursOfOperationNotes = data.hoursOfOperationNotes || ''
-        this.paymentForms = data.paymentForms || []
-        this.products = data.products || []
+        this.siteId = data.siteId;
+        this.title = data.title;
+        this.email = data.email;
+        this.facebook = data.facebook && data.facebook !== 'null' ? data.facebook : '';
+        this.twitter = data.twitter && data.twitter !== 'null' ? data.twitter : '';
+        this.instagram = data.instagram && data.instagram !== 'null' ? data.instagram : '';
+        this.gplus = data.gplus && data.gplus !== 'null' ? data.gplus : '';
+        this.siteUrl = data.siteUrl;
+        this.subdomain = data.subdomain;
+        this.about = data.about;
+        this.displayPicture = data.displayPicture;
+        this.phone = data.phone;
+        this.mobile = data.mobile;
+        this.hoursOfOperation = data.hoursOfOperation || [];
+        this.hoursOfOperationNotes = data.hoursOfOperationNotes || '';
+        this.paymentForms = data.paymentForms || [];
+        this.products = data.products || [];
     }
-    
+
 
     static toStorage(website: WebsiteModel): IWebsiteModelProps {
         return {
@@ -92,14 +91,15 @@ export class WebsiteModel implements IWebsiteModelProps {
             hoursOfOperationNotes: website.hoursOfOperationNotes,
             paymentForms: website.paymentForms,
             products: website.products
-        }
+        };
     }
 
     static fromApiResponse(data: IWebsiteApiProps): IWebsiteModelProps {
         let siteUrl = (data.site_data.site_url || '').replace('https', 'http');
 
-        if(siteUrl)
+        if (siteUrl) {
             siteUrl = siteUrl.startsWith('http') ? siteUrl : 'http://' + siteUrl;
+        }
 
         return new WebsiteModel({
             siteId: +data.site_id,
@@ -119,7 +119,7 @@ export class WebsiteModel implements IWebsiteModelProps {
             hoursOfOperationNotes: data.site_data.hours_of_operation_notes,
             paymentForms: data.site_data.payment_forms,
             products: data.site_data.products
-        })
+        });
     }
 
     static empty(): WebsiteModel {
@@ -141,34 +141,34 @@ export class WebsiteModel implements IWebsiteModelProps {
             hoursOfOperationNotes: null,
             paymentForms: null,
             products: null
-        })
+        });
     }
 }
 
 export interface IWebsiteModelProps {
-    siteId: number
-    title: string
-    email: string
-    facebook: string
-    twitter: string
-    instagram: string
-    gplus: string
-    siteUrl: string
-    subdomain: string
-    about: string
+    siteId: number;
+    title: string;
+    email: string;
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    gplus: string;
+    siteUrl: string;
+    subdomain: string;
+    about: string;
     displayPicture: {
         sizes: {
             thumbnail: string
         }
-    }
-    phone: string
-    mobile: string
-    hoursOfOperation: Array<any>
-    hoursOfOperationNotes: string
-    paymentForms: Array<'visa' | 'mastercard' | 'cash' | 'checks' | 'american-express'>
-    products: Array<string>
+    };
+    phone: string;
+    mobile: string;
+    hoursOfOperation: Array<any>;
+    hoursOfOperationNotes: string;
+    paymentForms: Array<'visa' | 'mastercard' | 'cash' | 'checks' | 'american-express'>;
+    products: Array<string>;
 }
 
 export interface IWebsitePageProps {
-    websiteList: Array<WebsiteModel>
+    websiteList: Array<WebsiteModel>;
 }
