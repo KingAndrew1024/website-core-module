@@ -7,12 +7,6 @@ export class WebsitePageModel implements IWebsitePageProps {
         this.websiteList = data.websiteList;
     }
 
-    static toStorage(websitePage: WebsitePageModel): IWebsitePageProps {
-        return {
-            websiteList: websitePage.websiteList
-        };
-    }
-
     static fromApiResponse(raw: Array<IWebsiteApiProps>): IWebsitePageProps {
         return new WebsitePageModel({
             websiteList: raw.map(resp => {
@@ -69,29 +63,6 @@ export class WebsiteModel implements IWebsiteModelProps {
         this.hoursOfOperationNotes = data.hoursOfOperationNotes || '';
         this.paymentForms = data.paymentForms || [];
         this.products = data.products || [];
-    }
-
-
-    static toStorage(website: WebsiteModel): IWebsiteModelProps {
-        return {
-            siteId: website.siteId,
-            title: website.title,
-            email: website.email,
-            facebook: website.facebook,
-            twitter: website.twitter,
-            instagram: website.instagram,
-            gplus: website.gplus,
-            siteUrl: website.siteUrl,
-            subdomain: website.subdomain,
-            about: website.about,
-            displayPicture: website.displayPicture,
-            phone: website.phone,
-            mobile: website.mobile,
-            hoursOfOperation: website.hoursOfOperation,
-            hoursOfOperationNotes: website.hoursOfOperationNotes,
-            paymentForms: website.paymentForms,
-            products: website.products
-        };
     }
 
     static fromApiResponse(data: IWebsiteApiProps): IWebsiteModelProps {

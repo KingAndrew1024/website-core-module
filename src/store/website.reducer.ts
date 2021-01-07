@@ -19,6 +19,10 @@ export const initialState: WebsiteState = {
     success: null
 };
 
+export interface AppState {
+    website: WebsiteState;
+}
+
 const reducer: ActionReducer<WebsiteState> = createReducer(
     initialState,
     // LOAD SECTION

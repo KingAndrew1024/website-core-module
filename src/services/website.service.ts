@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { IBusinessFormProps, IWebsiteFormProps } from '../core/contracts/IWebsite.repository';
+import { IBusinessFormProps, IWebsiteFormProps, IWebsiteRepository } from '../core/contracts/IWebsite.repository';
 import { IWebsiteService } from '../core/contracts/IWebsite.service';
 import { WebsitePageModel } from '../core/models/website.model';
-import { WebsiteRepository } from '../repositories/website.repository';
+import { WEBSITE_REPOSITORY } from './identifiers';
 
 @Injectable()
 export class WebsiteService implements IWebsiteService {
     constructor(
-        private repository: WebsiteRepository
+        @Inject(WEBSITE_REPOSITORY) private repository: IWebsiteRepository
     ) { }
 
     getWebsiteData(): Observable<WebsitePageModel> {

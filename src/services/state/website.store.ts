@@ -7,7 +7,7 @@ import * as fromSelector from '../../store/website.selectors';
 
 @Injectable()
 export class WebsiteStore {
-    constructor(private store: Store<fromReducer.WebsiteState>) { }
+    constructor(public store: Store<fromReducer.WebsiteState>) { }
 
     get Loading$() { return this.store.select(fromSelector.getIsLoading); }
 

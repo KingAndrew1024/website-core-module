@@ -8,9 +8,9 @@ export const getWebsitePageState = createSelector(
     state => state
 );
 
-const stateGetIsLoading = (state: fromReducer.WebsiteState) => state.isLoading;
+export const stateGetIsLoading = (state: fromReducer.WebsiteState) => state.isLoading;
 
-const stateGetWebsiteData = (state: fromReducer.WebsiteState) => state.data;
+export const stateGetWebsiteData = (state: fromReducer.WebsiteState) => state.data;
 
 export const getIsLoading = createSelector(
     getWebsitePageState,
