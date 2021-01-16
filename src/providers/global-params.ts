@@ -1,3 +1,4 @@
+
 export class AppSettingsService {
     constructor(settings: WebsiteModuleOptionsInterface) {
         this.setApiUrl(settings.apiUrl);
@@ -13,7 +14,7 @@ export class AppSettingsService {
     getInstanceName() { return this.instanceName; }
 }
 
-export interface WebsiteModuleOptionsInterface {
+export interface WebsiteModuleOptionsInterface{
     apiUrl: string;
     instanceName: string;
-}
+  }

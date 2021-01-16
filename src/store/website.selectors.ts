@@ -1,5 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+
 import * as fromReducer from './website.reducer';
+
 
 export const getWebsiteState = createFeatureSelector<fromReducer.WebsiteState>('website');
 
@@ -9,12 +11,18 @@ export const getWebsitePageState = createSelector(
 );
 
 export const stateGetIsLoading = (state: fromReducer.WebsiteState) => state.isLoading;
+export const stateGetIsLoadingImages = (state: fromReducer.WebsiteState) => state.isLoadingImages;
 
 export const stateGetWebsiteData = (state: fromReducer.WebsiteState) => state.data;
 
 export const getIsLoading = createSelector(
     getWebsitePageState,
     stateGetIsLoading
+);
+
+export const getIsLoadingImages = createSelector(
+    getWebsitePageState,
+    stateGetIsLoadingImages
 );
 
 export const getError = createSelector(

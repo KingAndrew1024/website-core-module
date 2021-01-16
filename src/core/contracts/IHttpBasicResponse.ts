@@ -1,4 +1,4 @@
-export interface IHttpBasicResponse<T> {
+export interface IHttpBasicResponse<T>{
     data?: T;
     error?: { message: any };
     message?: any; // <-- The error message

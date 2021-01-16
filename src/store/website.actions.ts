@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { IBusinessFormProps, IWebsiteFormProps } from '../core/contracts/IWebsite.repository';
-import { WebsitePageModel } from '../core/models/website.model';
 
-export enum WebsiteActionTypes {
+import { WebsitePageModel } from '../core/models/website.model';
+import { IWebsiteFormProps, IBusinessFormProps, IDeleteImageFormProps } from '../core/contracts/IWebsite.repository';
+
+export enum WebsiteActionTypes{
     LoadWebsiteBegin = '[WEBSITE] Load Webiste Begin',
     LoadWebsiteSuccess = '[WEBSITE] Load Webiste Success',
     LoadWebsiteFail = '[WEBSITE] Load Webiste Fail',
@@ -13,7 +14,12 @@ export enum WebsiteActionTypes {
 
     UpdateBusinessBegin = '[WEBSITE] Update Business Begin',
     UpdateBusinessSuccess = '[WEBSITE] Update Business Success',
-    UpdateBusinessFail = '[WEBSITE] Update Business Fail'
+    UpdateBusinessFail = '[WEBSITE] Update Business Fail',
+
+
+    DeleteImageBegin = '[WEBSITE] Delete Image Begin',
+    DeleteImageSuccess = '[WEBSITE] Delete Image Success',
+    DeleteImageFail = '[WEBSITE] Delete Image Fail'
 }
 
 export const LoadWebsiteBeginAction = createAction(
@@ -25,7 +31,7 @@ export const LoadWebsiteSuccessAction = createAction(
     props<{ payload: WebsitePageModel }>()
 );
 
-export const LoadWebsiteFailAction = createAction(
+export const LoadWebsiteFailAction  = createAction(
     WebsiteActionTypes.LoadWebsiteFail,
     props<{ errors: any }>()
 );
@@ -40,7 +46,7 @@ export const UpdateWebsiteSuccessAction = createAction(
     props<{ payload: WebsitePageModel }>()
 );
 
-export const UpdateWebsiteFailAction = createAction(
+export const UpdateWebsiteFailAction  = createAction(
     WebsiteActionTypes.UpdateWebsiteFail,
     props<{ errors: any }>()
 );
@@ -55,7 +61,22 @@ export const UpdateBusinessSuccessAction = createAction(
     props<{ payload: WebsitePageModel }>()
 );
 
-export const UpdateBusinessFailAction = createAction(
+export const UpdateBusinessFailAction  = createAction(
     WebsiteActionTypes.UpdateBusinessFail,
+    props<{ errors: any }>()
+);
+// -------------------- Image section -----------------
+export const DeleteImageBeginAction = createAction(
+    WebsiteActionTypes.DeleteImageBegin,
+    props<{ payload: IDeleteImageFormProps }>()
+);
+
+export const DeleteImageSuccessAction = createAction(
+    WebsiteActionTypes.DeleteImageSuccess,
+    props<{ response: any }>()
+);
+
+export const DeleteImageFailAction  = createAction(
+    WebsiteActionTypes.DeleteImageFail,
     props<{ errors: any }>()
 );

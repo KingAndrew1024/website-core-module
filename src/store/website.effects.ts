@@ -1,10 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Injectable, Inject } from '@angular/core';
+import { switchMap, map, catchError } from 'rxjs/operators';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+
+import * as fromActions from './website.actions';
 import { IWebsiteService } from '../core/contracts/IWebsite.service';
 import { WEBSITE_SERVICE } from '../services/identifiers';
-import * as fromActions from './website.actions';
 
 @Injectable()
 export class WebsiteEffects {
@@ -51,6 +52,23 @@ export class WebsiteEffects {
                     catchError(errors => {
                         console.error('WebsiteEffects.updateBusiness$ ERROR', errors);
                         return of(fromActions.UpdateBusinessFailAction({ errors }));
+                    })
+                );
+            })
+        )
+    );
+
+    deleteImage$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(fromActions.WebsiteActionTypes.DeleteImageBegin),
+            switchMap((action) => {
+                return this.service.deleteImage(( action as any).payload).pipe(
+                    map(response => {
+                        return fromActions.DeleteImageSuccessAction({ response });
+                    }),
+                    catchError(errors => {
+                        console.error('WebsiteEffects.deleteImage$ ERROR', errors);
+                        return of(fromActions.DeleteImageFailAction({ errors }));
                     })
                 );
             })

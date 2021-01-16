@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IBusinessFormProps, IWebsiteFormProps } from '../../core/contracts/IWebsite.repository';
+
+import * as fromSelector from '../../store/website.selectors';
 import * as fromActions from '../../store/website.actions';
 import * as fromReducer from '../../store/website.reducer';
-import * as fromSelector from '../../store/website.selectors';
+import { IWebsiteFormProps, IBusinessFormProps, IDeleteImageFormProps } from '../../core/contracts/IWebsite.repository';
+
 
 @Injectable()
 export class WebsiteStore {
     constructor(public store: Store<fromReducer.WebsiteState>) { }
 
     get Loading$() { return this.store.select(fromSelector.getIsLoading); }
+
+    get ImagesLoading$() { return this.store.select(fromSelector.getIsLoadingImages); }
 
     get Error$() { return this.store.select(fromSelector.getError); }
 
@@ -29,5 +33,9 @@ export class WebsiteStore {
 
     UpdateBusinessData(siteId: number, payload: IBusinessFormProps) {
         this.store.dispatch(fromActions.UpdateBusinessBeginAction({ siteId, payload }));
+    }
+
+    deleteImage(payload: IDeleteImageFormProps) {
+        this.store.dispatch(fromActions.DeleteImageBeginAction({ payload }));
     }
 }

@@ -53,8 +53,6 @@ describe('WebsiteService', () => {
 
         websiteService.updateWebsiteData(+siteId, newWebsiteFormData)
             .subscribe(response => {
-                console.log(response);
-
                 expect(response instanceof WebsitePageModel).toBeTrue();
                 done();
             });

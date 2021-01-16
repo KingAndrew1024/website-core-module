@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IHttpBasicResponse } from '../contracts/IHttpBasicResponse';
-import { IBusinessFormProps, IWebsiteApiProps, IWebsiteDataProps, IWebsiteFormProps, IWebsiteRepository } from '../contracts/IWebsite.repository';
+import {
+    IBusinessFormProps,
+    IDeleteImageFormProps,
+    IDeleteImageResponse,
+    IWebsiteApiProps,
+    IWebsiteDataProps,
+    IWebsiteFormProps,
+    IWebsiteRepository
+} from '../contracts/IWebsite.repository';
 import { TEST_SITES_LIST_API_DATA } from './website.data.mock';
 
 @Injectable()
@@ -23,12 +31,23 @@ export class MockWebsiteRepository implements IWebsiteRepository {
 
         return of(responseOk);
     }
+    deleteImage(payload: IDeleteImageFormProps): Observable<IHttpBasicResponse<IDeleteImageResponse>> {
+        const data = {
+            img: 'string',
+            msj: ''
+        } as any;
+
+        const responseOk: IHttpBasicResponse<IDeleteImageResponse> = {
+            data,
+            status: 'success'
+        };
+
+        return of(responseOk);
+    }
     updateWebsiteData(siteId: number, payload: IWebsiteFormProps): Observable<IHttpBasicResponse<IWebsiteDataProps>> {
         const data = {
-            siteData: {
-                ...TEST_SITES_LIST_API_DATA[0].site_data,
-                ...payload
-            },
+            ...TEST_SITES_LIST_API_DATA[0].site_data,
+            ...payload
         };
 
         const responseOk: IHttpBasicResponse<any> = {
@@ -39,7 +58,10 @@ export class MockWebsiteRepository implements IWebsiteRepository {
         return of(responseOk);
     }
     updateBusinessData(siteId: number, payload: IBusinessFormProps): Observable<IHttpBasicResponse<IWebsiteDataProps>> {
-        const data = {};
+        const data = {
+            ...TEST_SITES_LIST_API_DATA[0].site_data,
+            ...payload
+        };
 
         const responseOk: IHttpBasicResponse<any> = {
             data,
@@ -47,6 +69,10 @@ export class MockWebsiteRepository implements IWebsiteRepository {
         };
 
         return of(responseOk);
+    }
+
+    getUploadImagesUrl(): string {
+        return '';
     }
 
 }

@@ -1,5 +1,6 @@
 import { IWebsiteApiProps } from '../contracts/IWebsite.repository';
 
+
 export class WebsitePageModel implements IWebsitePageProps {
     websiteList: WebsiteModel[];
 
@@ -33,11 +34,7 @@ export class WebsiteModel implements IWebsiteModelProps {
     siteUrl: string;
     subdomain: string;
     about: string;
-    displayPicture: {
-        sizes: {
-            thumbnail: string
-        }
-    };
+    displayPicture?: IWebsitePicturesProps;
     phone: string;
     mobile: string;
     hoursOfOperation: any[];
@@ -83,7 +80,11 @@ export class WebsiteModel implements IWebsiteModelProps {
             siteUrl,
             subdomain: data.site_data.subdomian,
             about: data.site_data.about,
-            displayPicture: data.site_data.display_picture,
+            displayPicture: {
+                carrouselUrlImages: data.site_data.display_picture.carrousel_url_images,
+                logoUrlImage: data.site_data.display_picture.logo_url_image,
+                bannerUrl: data.site_data.tagline
+            },
             phone: data.site_data.phone,
             mobile: data.site_data.mobile,
             hoursOfOperation: data.site_data.hours_of_operation,
@@ -127,17 +128,19 @@ export interface IWebsiteModelProps {
     siteUrl: string;
     subdomain: string;
     about: string;
-    displayPicture: {
-        sizes: {
-            thumbnail: string
-        }
-    };
+    displayPicture?: IWebsitePicturesProps;
     phone: string;
     mobile: string;
     hoursOfOperation: Array<any>;
     hoursOfOperationNotes: string;
     paymentForms: Array<'visa' | 'mastercard' | 'cash' | 'checks' | 'american-express'>;
     products: Array<string>;
+}
+
+export interface IWebsitePicturesProps {
+    logoUrlImage: string;
+    bannerUrl: string;
+    carrouselUrlImages: {[key: number]: string};
 }
 
 export interface IWebsitePageProps {
