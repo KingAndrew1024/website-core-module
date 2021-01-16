@@ -36,10 +36,7 @@ describe('WebsiteRepository', () => {
 
     it('getWebsiteData Should call endpoint /sites with method GET', () => {
         websiteRepository.getWebsiteData()
-            .subscribe(resp => {
-                console.log(resp);
-
-            });
+            .subscribe();
 
         const req = httpTestingController.expectOne(request => request.url.endsWith('/sites'));
 
@@ -74,5 +71,9 @@ describe('WebsiteRepository', () => {
         expect(req.request.body).toBeDefined();
 
         req.flush({ status: 'success' });
+    });
+
+    afterEach(() => {
+        httpTestingController.verify();
     });
 });
